@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMNIDECK - El futuro de los juegos de cartas</title>
+	<link rel="icon" type="image/x-icon" href="https://www13.online-convert.com/v2/dl/web7/download-file/7d2292ca-ef55-4967-b2f8-28d99c278ca8/Gemini_Generated_Image_w2atoww2atoww2at%20%281%29%20%281%29.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= VARIABLES Y RESET ================= */
+        :root {
+            --bg-base: #050505;
+            --bg-surface: #111111;
+            --bg-surface-hover: #1a1a1a;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #ffffff;
+            --border-color: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { max-width: 100%; display: block; border-radius: 12px; }
+        a { text-decoration: none; color: inherit; }
+        
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Utilidades de espaciado */
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+        
+        .tag-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .heading-xl {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+        .heading-xl span { color: var(--text-muted); }
+
+        .heading-lg { font-size: 2.5rem; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.02em;}
+        .heading-md { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
+        
+        .text-body { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 24px; }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { transform: scale(1.05); }
+
+        .btn-store {
+            background-color: #1a1a1a;
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+        .btn-store:hover { background-color: #2a2a2a; }
+        .btn-store i { font-size: 1.5rem; }
+        .btn-store span { font-size: 0.7rem; display: block; line-height: 1; color: var(--text-muted); }
+        .btn-store strong { font-size: 1rem; display: block; line-height: 1.2; color: #fff;}
+
+        /* Placeholder de Imagen para que lo cambies por tus assets */
+        .img-placeholder {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .badge-step {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* ================= NAVBAR ================= */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.2rem; letter-spacing: 2px;}
+        .logo i { font-size: 1.5rem; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-main); }
+
+        /* ================= LAYOUTS GRID/FLEX ================= */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .split-reverse { direction: rtl; }
+        .split-reverse > * { direction: ltr; }
+
+        /* Icono de bloque */
+        .block-icon {
+            width: 48px; height: 48px;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 24px;
+        }
+
+        /* Grid de Checkmarks */
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 30px;
+        }
+        .check-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #ccc; }
+        .check-item i { color: #fff; font-size: 0.8rem; }
+
+        /* Especificaciones Grid */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .spec-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 16px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .spec-card:hover { transform: translateY(-5px); background-color: var(--bg-surface-hover); }
+        .spec-card i { font-size: 1.5rem; margin-bottom: 20px; color: var(--text-muted); }
+        .spec-card .spec-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px;}
+        .spec-card h4 { font-size: 1.2rem; margin-bottom: 8px; }
+        .spec-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* Testimonios */
+        .testimonial-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 60px;
+            max-width: 800px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .stars { color: #f5c518; margin-bottom: 20px; font-size: 1.2rem; }
+        .quote { font-size: 1.5rem; font-style: italic; color: #ddd; margin-bottom: 30px; line-height: 1.5; font-weight: 300;}
+        .author { display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .author img { width: 50px; height: 50px; border-radius: 50%; }
+        .author-info h5 { font-size: 1rem; margin: 0; text-align: left;}
+        .author-info p { font-size: 0.8rem; color: var(--text-muted); margin: 0; text-align: left;}
+        
+        .testimonial-nav { display: flex; justify-content: center; gap: 10px; }
+        .test-pill { padding: 8px 20px; border-radius: 20px; border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); cursor: pointer; font-size: 0.8rem;}
+        .test-pill.active { background: #fff; color: #000; }
+
+        /* FAQ Accordion */
+        .faq-container { max-width: 800px; margin: 0 auto; margin-top: 50px;}
+        details {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        summary {
+            padding: 24px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 1.5rem; color: var(--text-muted); }
+        details[open] summary::after { content: '−'; }
+        .faq-content { padding: 0 24px 24px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;}
+
+        /* Compra Card */
+        .buy-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+        .buy-content { padding: 50px; }
+        .buy-item { display: flex; gap: 15px; margin-bottom: 20px; }
+        .buy-item i { color: var(--text-muted); margin-top: 5px;}
+        .buy-item h5 { font-size: 1rem; }
+        .buy-item p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* Media Queries (Móvil) */
+        @media (max-width: 900px) {
+            .split-section { grid-template-columns: 1fr; gap: 40px; }
+            .split-reverse { direction: ltr; }
+            .heading-xl { font-size: 2.5rem; }
+            .nav-links { display: none; /* Aquí iría un menú hamburguesa en un proyecto real */ }
+            .buy-card { grid-template-columns: 1fr; }
+            .testimonial-card { padding: 30px; }
+            .quote { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-spade"></i> OMNIDECK
+            </div>
+            <nav class="nav-links">
+                <a href="#producto">El Producto</a>
+                <a href="#historia">Historia</a>
+                <a href="#especificaciones">Especificaciones</a>
+                <a href="#faq">FAQ</a>
+                <a href="#cartas">Las Cartas</a>
+            </nav>
+            <a href="#comprar" class="btn-primary">Comprar Ahora</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding text-center" style="padding-top: 150px;" id="producto">
+            <div class="container">
+                <span class="tag-subtitle">El Ecosistema</span>
+                <h1 class="heading-xl">Tres piezas.<br><span>Un universo de juego.</span></h1>
+                
+                <div class="split-section" style="margin-top: 80px; text-align: left;">
+                    <div class="img-placeholder" style="background-image: url('https://i.imgur.com/VvVJoXl.png'); background-size: cover; background-position: center; border: none;">
+</div>
+                    <div>
+                        <div class="block-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+                        <span class="tag-subtitle">EL CENTRO DE CONTROL</span>
+                        <h2 class="heading-lg">Estuche Hub Inteligente</h2>
+                        <p class="text-body">El estuche hub tiene dos compartimentos integrados: el superior aloja las cartas y el inferior contiene el módulo de carga MagSafe. Coloca las cartas en el compartimento inferior y se cargan solas. Conectividad Wi-Fi 6 + Bluetooth 5.2 para sincronización instantánea.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="split-section split-reverse">
+                    <div class="img-placeholder" style="min-height: 500px; background-image: url('https://i.imgur.com/TBpRnVs.png'); background-size: cover; background-position: center; border: none;">
+</div>
+                    <div>
+                        <div class="block-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <span class="tag-subtitle">EL LIENZO INFINITO</span>
+                        <h2 class="heading-lg">Cartas E-Ink Premium</h2>
+                        <p class="text-body">Pantallas OLED flexibles ultradelgadas de 0,8mm. Tacto de papel de alta calidad con tecnología e-ink a color. Sin fatiga visual, resistentes a salpicaduras y con durabilidad extrema.</p>
+                        
+                        <div class="check-grid">
+                            <div class="check-item"><i class="fa-solid fa-check"></i> 0.8mm de grosor</div>
+                            <div class="check-item"><i class="fa-solid fa-check"></i> E-Ink color + OLED flex</div>
+                            <div class="check-item"><i class="fa-solid fa-check"></i> Tacto premium</div>
+                            <div class="check-item"><i class="fa-solid fa-check"></i> IPX4 resistente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding text-center">
+            <div class="container">
+                <span class="tag-subtitle">La Aplicación</span>
+                <h2 class="heading-xl">Tu biblioteca de juegos.<br><span>En la palma de tu mano.</span></h2>
+
+                <div class="split-section" style="margin-top: 80px; text-align: left;">
+                    <div class="img-placeholder" style="min-height: 600px;">
+    <img src="https://i.imgur.com/Adw07sT.png" alt="Mockup del Smartphone" style="max-width: 100%; height: auto;">
+</div>
+                    <div>
+                        <span class="tag-subtitle">APP DISPONIBLE</span>
+                        <h2 class="heading-lg">Controla todo desde<br>tu smartphone.</h2>
+                        <p class="text-body">La app OMNIDECK es el centro de mando de tu mazo inteligente. Selecciona el juego, personaliza las cartas y sincroniza con un solo tap — las cartas físicas se actualizan en segundos.</p>
+                        
+                        <div class="check-grid" style="margin-bottom: 40px;">
+                            <div>
+                                <div class="block-icon" style="width:36px; height:36px; margin-bottom:10px;"><i class="fa-solid fa-gamepad" style="font-size:0.8rem;"></i></div>
+                                <h4 style="font-size:1rem; margin-bottom:5px;">Miles de juegos</h4>
+                                <p style="font-size:0.8rem; color:var(--text-muted);">Poker, UNO, Truco, Blackjack, Ruleta... Toda la biblioteca a un tap.</p>
+                            </div>
+                            <div>
+                                <div class="block-icon" style="width:36px; height:36px; margin-bottom:10px;"><i class="fa-solid fa-rotate" style="font-size:0.8rem;"></i></div>
+                                <h4 style="font-size:1rem; margin-bottom:5px;">Sincronización instantánea</h4>
+                                <p style="font-size:0.8rem; color:var(--text-muted);">Pulsa un botón y tus cartas físicas se actualizan en segundos.</p>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <div class="block-icon" style="width:36px; height:36px; margin-bottom:10px;"><i class="fa-solid fa-mobile-screen" style="font-size:0.8rem;"></i></div>
+                                <h4 style="font-size:1rem; margin-bottom:5px;">iOS & Android</h4>
+                                <p style="font-size:0.8rem; color:var(--text-muted);">App nativa para ambas plataformas con actualizaciones de por vida.</p>
+                            </div>
+                            <div style="margin-top: 20px;">
+                                <div class="block-icon" style="width:36px; height:36px; margin-bottom:10px;"><i class="fa-solid fa-users" style="font-size:0.8rem;"></i></div>
+                                <h4 style="font-size:1rem; margin-bottom:5px;">Multijugador local</h4>
+                                <p style="font-size:0.8rem; color:var(--text-muted);">Conecta varios dispositivos y juega con amigos sin internet.</p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 15px;">
+                            <a href="#" class="btn-store">
+                                <i class="fa-brands fa-apple"></i>
+                                <div><span>Disponible en</span><strong>App Store</strong></div>
+                            </a>
+                            <a href="#" class="btn-store">
+                                <i class="fa-brands fa-google-play"></i>
+                                <div><span>Disponible en</span><strong>Google Play</strong></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" id="especificaciones">
+            <div class="container">
+                <h2 class="heading-xl" style="margin-bottom: 50px;">Ingeniería sin<br><span>compromisos.</span></h2>
+                
+                <div class="img-placeholder" style="
+  min-height: 400px;
+  margin-bottom: 60px;
+  background-image: url('https://i.imgur.com/yHrRFwP.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+">
+</div>
+
+                <div class="specs-grid">
+                    <div class="spec-card">
+                        <i class="fa-solid fa-battery-full"></i>
+                        <div class="spec-title">Batería</div>
+                        <h4>72 horas</h4>
+                        <p>Juego continuo sin interrupciones</p>
+                    </div>
+                    <div class="spec-card">
+                        <i class="fa-solid fa-bolt"></i>
+                        <div class="spec-title">Carga</div>
+                        <h4>MagSafe</h4>
+                        <p>Compartimento inferior dedicado</p>
+                    </div>
+                    <div class="spec-card">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <div class="spec-title">Grosor por carta</div>
+                        <h4>0.8 mm</h4>
+                        <p>Tacto premium, flexibilidad total</p>
+                    </div>
+                    <div class="spec-card">
+                        <i class="fa-solid fa-wifi"></i>
+                        <div class="spec-title">Conectividad</div>
+                        <h4>Wi-Fi 6 + BT 5.2</h4>
+                        <p>Sincronización instantánea</p>
+                    </div>
+                    <div class="spec-card">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div class="spec-title">Resistencia</div>
+                        <h4>IPX4</h4>
+                        <p>Resistente a salpicaduras</p>
+                    </div>
+                    <div class="spec-card">
+                        <i class="fa-solid fa-gear"></i>
+                        <div class="spec-title">Material</div>
+                        <h4>Aluminio aeroespacial</h4>
+                        <p>Acabado anodizado premium</p>
+                    </div>
+                    <div class="spec-card">
+                        <i class="fa-solid fa-display"></i>
+                        <div class="spec-title">Pantalla</div>
+                        <h4>E-Ink color + OLED flex</h4>
+                        <p>Sin fatiga visual, color real</p>
+                    </div>
+                    <div class="spec-card">
+                        <i class="fa-solid fa-border-all"></i>
+                        <div class="spec-title">Cartas incluidas</div>
+                        <h4>54 cartas</h4>
+                        <p>52 + 2 comodines digitales</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding text-center">
+            <div class="container">
+                <span class="tag-subtitle">TESTIMONIOS</span>
+                <h2 class="heading-xl">Los que ya juegan<br><span>con el futuro.</span></h2>
+
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="quote" id="test-quote">"Llevo 15 años comprando barajas especializadas. OMNIDECK es el salto cuántico que nunca esperé. El tacto de las cartas e-ink es indistinguible del papel premium. Absolutamente revolucionario."</p>
+                    <div class="author">
+                        <div class="author-info">
+                            <h5 id="test-name">Alejandro M.</h5>
+                            <p id="test-title">Diseñador de juegos, Barcelona</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <button class="test-pill active" onclick="cambiarTestimonio(0, this)">Alejandro M.</button>
+                    <button class="test-pill" onclick="cambiarTestimonio(1, this)">Clara R.</button>
+                    <button class="test-pill" onclick="cambiarTestimonio(2, this)">Marc T.</button>
+                    <button class="test-pill" onclick="cambiarTestimonio(3, this)">Isabel F.</button>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            // Aquí puedes personalizar los textos de cada persona
+            const testimonios = [
+                {
+                    cita: '"Llevo 15 años comprando barajas especializadas. OMNIDECK es el salto cuántico que nunca esperé. El tacto de las cartas e-ink es indistinguible del papel premium. Absolutamente revolucionario."',
+                    nombre: 'Alejandro M.',
+                    titulo: 'Diseñador de juegos, Barcelona'
+                },
+                {
+                    cita: '"La sincronización con la app es instantánea. Poder cambiar de Póker a Truco en un segundo frente a mis amigos no tiene precio. El diseño es brutal y la batería dura eternamente."',
+                    nombre: 'Clara R.',
+                    titulo: 'Jugadora competitiva, Madrid'
+                },
+                {
+                    cita: '"Como mago, la tecnología detrás de estas cartas abre un abanico de posibilidades increíbles. Es el futuro de la magia y del entretenimiento. Materiales top de verdad."',
+                    nombre: 'Marc T.',
+                    titulo: 'Ilusionista profesional, Valencia'
+                },
+                {
+                    cita: '"Al principio dudaba si echaría de menos mis cartas de siempre, pero la pantalla E-Ink es mágica. No cansa la vista y el estuche cabe perfectamente en la mochila para los viajes."',
+                    nombre: 'Isabel F.',
+                    titulo: 'Entusiasta de juegos de mesa, Sevilla'
+                }
+            ];
+
+            function cambiarTestimonio(indice, elementoBoton) {
+                // Actualizar los textos
+                document.getElementById('test-quote').innerText = testimonios[indice].cita;
+                document.getElementById('test-name').innerText = testimonios[indice].nombre;
+                document.getElementById('test-title').innerText = testimonios[indice].titulo;
+
+                // Actualizar el botón activo (quitar la clase 'active' a todos y ponérsela al que se hizo clic)
+                const botones = document.querySelectorAll('.test-pill');
+                botones.forEach(btn => btn.classList.remove('active'));
+                elementoBoton.classList.add('active');
+            }
+        </script>
+<style>
+    :root {
+        --text-muted: #888;
+        --bg-dark: #000;
+        --text-light: #ffffff;
+        --accent-color: #ffffff;
+    }
+
+    #historia {
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        padding: 80px 0;
+        font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    .full-stack-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        max-width: 1000px; /* Ancho óptimo para lectura y visualización */
+        margin: 0 auto;
+    }
+
+    .img-full-width {
+        width: 100%;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+
+    .img-full-width img {
+        width: 100%;
+        height: auto;
+        max-height: 550px; /* Evita que la imagen sea infinita en pantallas grandes */
+        object-fit: cover;
+        display: block;
+    }
+
+    .text-content-full {
+        width: 100%;
+        text-align: left;
+    }
+
+    .tag-subtitle {
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 15px;
+    }
+
+    .heading-lg {
+        line-height: 1.1;
+        margin-bottom: 40px;
+        font-size: 3.5rem;
+        font-weight: 700;
+    }
+
+    .body-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Dividimos el texto en dos para mejor legibilidad */
+        gap: 40px;
+    }
+
+    .text-body {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #d1d1d1;
+    }
+
+    .text-body strong {
+        color: var(--text-light);
+    }
+
+    /* Ajuste para móviles */
+    @media (max-width: 768px) {
+        .heading-lg {
+            font-size: 2.5rem;
+        }
+        .body-columns {
+            grid-template-columns: 1fr; /* En móvil, el texto vuelve a una sola columna */
+            gap: 20px;
+        }
+        #historia {
+            padding: 40px 20px;
+        }
+    }
+</style>
+
+<section id="historia">
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+        <div class="full-stack-layout">
+            
+            <div class="img-full-width">
+                <img src="https://i.imgur.com/JnO5bNE.jpeg" alt="Desarrollador trabajando">
+            </div>
+
+            <div class="text-content-full">
+                <span class="tag-subtitle">Nuestra Historia</span>
+                <h2 class="heading-lg">
+                    Nacimos de <span style="color: var(--text-muted); font-weight: 300;">una frustración.</span>
+                </h2>
+                
+                <div class="body-columns">
+                    <div class="col-left">
+                        <p class="text-body">
+                            Llevar decenas de cajas de juegos a cada viaje. Organizar torneos con barajas incompletas. Perder cartas irreemplazables. Buscar durante horas ese juego concreto que ya no se fabrica. 
+                            <strong>Conocíamos el problema porque lo vivíamos nosotros mismos.</strong>
+                        </p>
+                    </div>
+                    <div class="col-right">
+                        <p class="text-body">
+                            Nos hicimos una pregunta imposible: <em>"¿Y si un solo mazo pudiera ser el lienzo de cualquier juego?"</em> Parecía ciencia ficción. Cinco años después, está en tus manos.
+                        </p>
+                        <p class="text-body">
+                            Creamos el lienzo lúdico definitivo. <strong>Somos ingenieros, diseñadores y jugadores apasionados</strong>, unidos por una misión: borrar los límites entre lo físico y lo digital.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        <section class="section-padding" id="faq">
+            <div class="container text-center">
+                <h2 class="heading-xl">Preguntas frecuentes.</h2>
+                <p class="text-body">Todo lo que necesitas saber antes de dar el salto.</p>
+                
+                <div class="faq-container text-left" style="text-align: left;">
+                    <details open>
+                        <summary>¿Con qué juegos es compatible OMNIDECK?</summary>
+                        <div class="faq-content">
+                            OMNIDECK es compatible con más de 10.000 juegos de cartas de todo el mundo: póker, bridge, UNO, Magic: The Gathering, Pokémon TCG, Hearthstone físico, juegos de rol, tarot y cientos de juegos independientes. Nuestra biblioteca se actualiza semanalmente con nuevos títulos.
+                        </div>
+                    </details>
+                    <details>
+                        <summary>¿Cuánto dura la batería del estuche?</summary>
+                        <div class="faq-content">El estuche proporciona hasta 72 horas de juego continuo.</div>
+                    </details>
+                    <details>
+                        <summary>¿Las cartas se sienten como cartas reales?</summary>
+                        <div class="faq-content">Sí, utilizamos un recubrimiento especial texturizado sobre la pantalla e-ink que imita la fricción y el tacto del papel premium y polímeros utilizados en casinos.</div>
+                    </details>
+                    <details>
+                        <summary>¿Es necesario estar conectado a internet para jugar?</summary>
+                        <div class="faq-content">No. Una vez sincronizado el juego desde la app a tus cartas vía Bluetooth, puedes jugar totalmente offline en cualquier lugar.</div>
+                    </details>
+                    <details>
+                        <summary>¿Cuántas personas pueden jugar simultáneamente?</summary>
+                        <div class="faq-content">Depende del juego seleccionado. Puedes enlazar varios dispositivos OMNIDECK para juegos que requieran cientos de cartas.</div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding text-center" id="comprar" style="padding-bottom: 150px;">
+            <div class="container">
+                <span class="tag-subtitle">ADQUIERE EL TUYO</span>
+                <h2 class="heading-xl">El paquete<br><span style="color:var(--text-muted); font-weight:300;">Edición Fundadores.</span></h2>
+                <p class="text-body" style="max-width: 600px; margin: 0 auto;">Primeras unidades disponibles. Los fundadores reciben acceso anticipado, precio especial y soporte prioritario de por vida.</p>
+
+                <div class="buy-card text-left" style="text-align: left;">
+                    <div class="img-placeholder" style="border: none; border-radius: 0; background-image: url('https://i.imgur.com/VvVJoXl.png'); background-size: cover; background-position: center;">
+    <div class="badge-step" style="background:#fff; color:#000;">EDICIÓN FUNDADORES</div>
+</div>
+                    <div class="buy-content">
+                        <h3 class="heading-md">OMNIDECK Complete</h3>
+                        <p class="text-body" style="font-size: 0.9rem; margin-bottom: 30px;">Todo lo que necesitas para empezar. Sin sorpresas.</p>
+
+                        <div class="buy-item">
+                            <i class="fa-solid fa-box"></i>
+                            <div>
+                                <h5>Estuche Hub Inteligente</h5>
+                                <p>Aluminio aeroespacial anodizado</p>
+                            </div>
+                        </div>
+                        <div class="buy-item">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <div>
+                                <h5>54 Cartas Digitales E-Ink</h5>
+                                <p>52 + 2 comodines de alta resolución</p>
+                            </div>
+                        </div>
+                        <div class="buy-item">
+                            <i class="fa-brands fa-usb"></i>
+                            <div>
+                                <h5>Cable USB-C Premium</h5>
+                                <p>Trenzado de nailon, 1.5m</p>
+                            </div>
+                        </div>
+                        <div class="buy-item">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <div>
+                                <h5>Acceso Completo a la App</h5>
+                                <p>Suscripción vitalicia incluida</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" style="width: 100%; margin-top: 20px; padding: 16px; font-size: 1.1rem;">Reservar Ahora — 199€</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
